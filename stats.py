@@ -3,21 +3,6 @@ def word_count(file_path):
         text = f.read()
         print(f"Found {len(text.split())} total words")
 
-# def char_count(file_path):
-#     with open(file_path) as f:
-#         text = f.read()
-#         words = text.split()
-#         char_list = {}
-#         for word in words:
-#             for letter in word:
-#                 if letter in char_list:
-#                     char_list[letter.lower()] += 1
-#                 else:
-#                     char_list[letter.lower()] = 1
-#         print(char_list)
-
-
-
 def char_count(file_path):
     with open(file_path) as f:
         text = f.read()
@@ -27,4 +12,18 @@ def char_count(file_path):
                 char_list[letter.lower()] += 1
             else:
                 char_list[letter.lower()] = 1
-        print(char_list)
+        return char_list
+
+
+def expanded_dic(char_list):
+    sorted = []
+    for char in char_list:
+        count = char_list[char]
+        item = {"char": char, "num": count}
+        sorted.append(item)
+    return sorted
+
+def sort_dict(list):
+    return list["num"]
+
+
