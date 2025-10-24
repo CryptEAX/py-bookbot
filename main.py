@@ -1,3 +1,4 @@
+import sys
 from stats import word_count
 from stats import char_count
 from stats import expanded_dic
@@ -11,16 +12,21 @@ def get_book_text(file_path):
 
 
 def main():
-    print("============ BOOKBOT ============")
-    print("Analyzing book found at books/frankenstein.txt...")
-    print("----------- Word Count ----------")
-    word_count("./books/frankenstein.txt")
-    print("--------- Character Count -------")
-    count = expanded_dic(char_count("./books/frankenstein.txt"))
-    count.sort(reverse=True, key=sort_dict)
-    for c in count:
-        letter, num = c["char"], c["num"]
-        if letter.isalpha() == True:
-            print(f"{letter}: {num}")
-    print("============= END ===============")
+    try:
+        filepath = sys.argv[1]
+        print("============ BOOKBOT ============")
+        print(f"Analyzing book found at {filepath}")
+        print("----------- Word Count ----------")
+        word_count(filepath)
+        print("--------- Character Count -------")
+        count = expanded_dic(char_count(filepath))
+        count.sort(reverse=True, key=sort_dict)
+        for c in count:
+            letter, num = c["char"], c["num"]
+            if letter.isalpha() == True:
+                print(f"{letter}: {num}")
+        print("============= END ===============")
+    except:
+        print("Usage: python3 main.py <path_to_book>")
+        sys.exit(1)
 main()
